@@ -11,13 +11,16 @@
 
   <body>
     <div>
-      <%= flash["notice"] %>
+      <%= flash[:notice] %>
     </div>
     <div>
       <a href="/">Home</a>
-      <a href="/logout">Logout</a>
-      <a href="/login">Login</a>
-      <a href="/users/new">Signup</a>
+      <% if session[:user_id] %>
+        <a href="/logout">Logout</a>
+      <% else %>
+        <a href="/login">Login</a>
+        <a href="/users/new">Signup</a>
+      <% end %>
     </div>
 
     <%= yield %>
