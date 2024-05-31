@@ -6,7 +6,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <link rel="stylesheet" href="/stylesheets/application.css">
   </head>
 
   <body>
@@ -16,7 +15,9 @@
     <div>
       <a href="/">Home</a>
       <% if session[:user_id] %>
-        <a href="/logout">Logout</a>
+        <% @current_user = User.find(session[:user_id]) %>
+        <span>Logged in as: <%= @current_user.username %></span>
+        <%= link_to 'Logout', logout_path, method: :delete, data: { confirm: 'Are you sure?' } %>
       <% else %>
         <a href="/login">Login</a>
         <a href="/users/new">Signup</a>
